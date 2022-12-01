@@ -77,6 +77,11 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/models.URLShortenRequest'
+      - description: Access API key
+        in: header
+        name: x-api-key
+        required: true
+        type: string
       produces:
       - application/json
       responses:

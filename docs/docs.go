@@ -64,6 +64,13 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/models.URLShortenRequest"
                         }
+                    },
+                    {
+                        "type": "string",
+                        "description": "Access API key",
+                        "name": "x-api-key",
+                        "in": "header",
+                        "required": true
                     }
                 ],
                 "responses": {

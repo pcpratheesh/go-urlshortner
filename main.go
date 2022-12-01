@@ -11,6 +11,7 @@ import (
 	"github.com/pcpratheesh/go-urlshortner/config"
 	"github.com/pcpratheesh/go-urlshortner/controllers"
 	"github.com/pcpratheesh/go-urlshortner/docs"
+	"github.com/pcpratheesh/go-urlshortner/middleware"
 	"github.com/sirupsen/logrus"
 
 	_ "github.com/pcpratheesh/go-urlshortner/docs"
@@ -72,7 +73,7 @@ func main() {
 		// endpoint handler declarations
 		app.Get("/", controller.Home)
 		app.Get("/health", controller.Health)
-		app.Post("/encode", controller.EncodeURL)
+		app.Post("/encode", middleware.ApiKeyMiddleware(cfg.XApiKey), controller.EncodeURL)
 		app.Get("/short/:url", controller.DecodeURL)
 
 		app.Get("/swagger/*", fiberSwagger.WrapHandler)

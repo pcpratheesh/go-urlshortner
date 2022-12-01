@@ -66,6 +66,7 @@ func (c *controller) Health(ctx *fiber.Ctx) error {
 // @Description This endpoint is for prepare teh encoded url
 // @Produce json
 // @Param RequestBody body models.URLShortenRequest true "The body to request an encode"
+// @Param x-api-key header string true "Access API key"
 // @Success 200 {object} models.URLShortenResponse
 // @Failure 400 {object} models.HTTPError400
 // @Failure 404 {object} models.HTTPError404
