@@ -180,7 +180,7 @@ func TestURLEncoding(t *testing.T) {
 
 func TestCheckingURL(t *testing.T) {
 	app, controller := SetupBase()
-	var responseModel models.URLShortnerResponse
+	var responseModel models.URLShortenResponse
 
 	t.Run("first-run", func(t *testing.T) {
 		app.Post("/encode", controller.EncodeURL)
@@ -225,7 +225,7 @@ func TestCheckingURL(t *testing.T) {
 		resp, _ := app.Test(req, 1)
 		defer resp.Body.Close()
 
-		var responseModelSecond models.URLShortnerResponse
+		var responseModelSecond models.URLShortenResponse
 
 		// Verify, if the status code is as expected
 		assert.Equalf(t, http.StatusOK, resp.StatusCode, "test")
