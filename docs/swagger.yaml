@@ -1,0 +1,148 @@
+basePath: /
+definitions:
+  models.HTTPError400:
+    properties:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: status bad request
+        type: string
+    type: object
+  models.HTTPError404:
+    properties:
+      code:
+        example: 404
+        type: integer
+      message:
+        example: status Page NotFound
+        type: string
+    type: object
+  models.HTTPError500:
+    properties:
+      code:
+        example: 500
+        type: integer
+      message:
+        example: status internal server error
+        type: string
+    type: object
+  models.URLShortnerResponse:
+    properties:
+      url:
+        type: string
+    type: object
+host: localhost
+info:
+  contact: {}
+  description: This is a golang url shortner application.
+  title: Go URL Shortner App
+  version: "2.0"
+paths:
+  /:
+    get:
+      description: Home endpoint.
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.HTTPError400'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.HTTPError404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.HTTPError500'
+      summary: Home endpoint
+  /encode:
+    post:
+      consumes:
+      - '*/*'
+      description: This endpoint is for prepare teh encoded url
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.URLShortnerResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.HTTPError400'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.HTTPError404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.HTTPError500'
+      summary: Endpoint encode url
+  /health:
+    get:
+      consumes:
+      - '*/*'
+      description: This endpoint exists solely for checking the active status of the
+        application. Any HTTP status other than 200 signifies that the application
+        is down
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.HTTPError400'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.HTTPError404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.HTTPError500'
+      summary: Health check endpoint for urlshortner
+  /short/{shorturl}:
+    get:
+      consumes:
+      - '*/*'
+      description: fetch the original url and redirect to that web site
+      parameters:
+      - description: shorturl
+        in: path
+        name: shorturl
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.HTTPError400'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.HTTPError404'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.HTTPError500'
+      summary: Endpoint decode url
+schemes:
+- http
+swagger: "2.0"
