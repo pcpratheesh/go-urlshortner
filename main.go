@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"strings"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/pcpratheesh/go-urlshortner/config"
@@ -41,6 +42,7 @@ func main() {
 	// initialize the controller
 	controller, err := controllers.NewController(controllers.Config{
 		BaseURL: cfg.BaseURL,
+		Store:   cfg.Store,
 	})
 	if err != nil {
 		logrus.Fatal(err)
@@ -58,11 +60,13 @@ func main() {
 
 	{
 
+		swaggerHost := strings.Replace(cfg.BaseURL, "https://", "", -1)
+		swaggerHost = strings.Replace(swaggerHost, "http://", "", -1)
 		// SET swagger info
 		docs.SwaggerInfo.Title = "Go URL Shortner Docs"
 		docs.SwaggerInfo.Description = "Go URL Shortner API Docs"
 		docs.SwaggerInfo.Version = "1.0"
-		docs.SwaggerInfo.Host = cfg.BaseURL
+		docs.SwaggerInfo.Host = swaggerHost
 		docs.SwaggerInfo.Schemes = []string{"http", "https"}
 
 		// endpoint handler declarations

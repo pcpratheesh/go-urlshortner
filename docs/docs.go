@@ -51,18 +51,26 @@ const docTemplate = `{
         "/encode": {
             "post": {
                 "description": "This endpoint is for prepare teh encoded url",
-                "consumes": [
-                    "*/*"
-                ],
                 "produces": [
                     "application/json"
                 ],
                 "summary": "Endpoint encode url",
+                "parameters": [
+                    {
+                        "description": "The body to request an encode",
+                        "name": "RequestBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.URLShortenRequest"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.URLShortnerResponse"
+                            "$ref": "#/definitions/models.URLShortenResponse"
                         }
                     },
                     "400": {
@@ -212,9 +220,20 @@ const docTemplate = `{
                 }
             }
         },
-        "models.URLShortnerResponse": {
+        "models.URLShortenRequest": {
             "type": "object",
             "properties": {
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.URLShortenResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
                 "url": {
                     "type": "string"
                 }

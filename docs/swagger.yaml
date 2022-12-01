@@ -27,8 +27,15 @@ definitions:
         example: status internal server error
         type: string
     type: object
-  models.URLShortnerResponse:
+  models.URLShortenRequest:
     properties:
+      url:
+        type: string
+    type: object
+  models.URLShortenResponse:
+    properties:
+      code:
+        type: string
       url:
         type: string
     type: object
@@ -62,16 +69,21 @@ paths:
       summary: Home endpoint
   /encode:
     post:
-      consumes:
-      - '*/*'
       description: This endpoint is for prepare teh encoded url
+      parameters:
+      - description: The body to request an encode
+        in: body
+        name: RequestBody
+        required: true
+        schema:
+          $ref: '#/definitions/models.URLShortenRequest'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.URLShortnerResponse'
+            $ref: '#/definitions/models.URLShortenResponse'
         "400":
           description: Bad Request
           schema:
