@@ -20,6 +20,8 @@ func NewStorage(store string) (StorageInterface, error) {
 	switch store {
 	case STORE_TYPE_INMEMORY:
 		return NewInMemoryStorage(), nil
+	case STORE_TYPE_FILE:
+		return NewFileStorage("data/contents.txt"), nil
 	default:
 		return nil, fmt.Errorf("%v store is not implemented", store)
 	}

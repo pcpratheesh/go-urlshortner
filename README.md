@@ -85,3 +85,9 @@ Follow the below steps to implement the redis cache
     docker container ps
     
     docker logs <container_id> --follow
+
+
+
+## Switch shortned url storage
+You can setup environment variable as 
+`URLSRT_STORE='File'` or `URLSRT_STORE='InMemory'`

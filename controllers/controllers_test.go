@@ -10,6 +10,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/pcpratheesh/go-urlshortner/config"
 	"github.com/pcpratheesh/go-urlshortner/models"
+	"github.com/pcpratheesh/go-urlshortner/pkg/storage"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 )
@@ -27,7 +28,7 @@ func SetupBase() (app *fiber.App, controller *controller) {
 	// initialize the controller
 	controller, err = NewController(Config{
 		BaseURL: cfg.BaseURL,
-		Store:   cfg.Store,
+		Store:   storage.STORE_TYPE_INMEMORY,
 	})
 	if err != nil {
 		logrus.Fatal(err)
