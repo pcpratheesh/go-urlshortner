@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  app:
+    build: .
+    image: pcpratheesh/go_url_shortner
+    container_name: url_shortner_container
+    environment:
+      URLSRT_BASE_URL: http://127.0.0.1:8080
+    ports:
+      - 8080:8080
+
