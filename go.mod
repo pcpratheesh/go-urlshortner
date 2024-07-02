@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d
-	github.com/gofiber/fiber/v2 v2.52.1
+	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/google/uuid v1.5.0
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/sirupsen/logrus v1.9.0
